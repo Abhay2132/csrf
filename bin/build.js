@@ -8,13 +8,14 @@ const root = r();
 const layout = Handlebars.compile(read(j(root, "views", "layouts", "main.hbs")))
 const index = Handlebars.compile(layout({
     body: read(j(root, "views", "index.hbs"))
-}), {site})
+}))
+const indexhtm = index({site})
 
 makeFreshDir(j(root, "dist"))
 makeFreshDir(j(root, "public"))
 
-fs.writeFileSync(j(root, "dist", "index.html"), index());
-fs.writeFileSync(j(root, "public", "index.html"), index());
+fs.writeFileSync(j(root, "dist", "index.html"), indexhtm);
+fs.writeFileSync(j(root, "public", "index.html"), indexhtm);
 
 function read(file){
     return fs.readFileSync(file).toString();
