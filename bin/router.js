@@ -15,17 +15,17 @@ router.use((req, res, next) => {
 })
 
 router.post("/submit", (req, res) => {
-    console.log("post /submit");
+    // console.log("post /submit");
     res.sendJson({ ...req.body, cookies: req.headers.cookie })
 })
 
 router.get("/cookies", (req, res) => { 
-    console.log(req.headers.cookie)
+    // console.log(req.headers.cookie)
     res.sendJson({ cookie:req.headers.cookie});
 });
 
 router.get("/", (req,res)=>{
-    console.log({site})
+    // console.log({site})
     res.render("index", {site})
 })
 
