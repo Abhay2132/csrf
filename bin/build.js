@@ -11,8 +11,10 @@ const index = Handlebars.compile(layout({
 }), {site})
 
 makeFreshDir(j(root, "dist"))
+makeFreshDir(j(root, "public"))
 
 fs.writeFileSync(j(root, "dist", "index.html"), index());
+fs.writeFileSync(j(root, "public", "index.html"), index());
 
 function read(file){
     return fs.readFileSync(file).toString();
