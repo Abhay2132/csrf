@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Attack Demo</title>
+    <style>
+        body {
+            margin: 0;
+            height: var(--innerH, 100vh);
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-item: center;
+        }
+
+        #main {
+            width: min(100%, 400px);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div id="main">
+            <style>
+    form{
+        background: #eee;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        marign: 10px;
+        padding: 10px;
+    }
+
+    input {
+        font-size: 1rem;
+        font-family: sans;
+        display: block;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    form * {
+        font-family: sans;
+        font-size: 1rem;
+    }
+
+    form :not(input[type=submit]) {
+        width: calc(100% - 60px);
+    }
+    
+    label {
+        display: block;
+        margin: 20px 0 0 10px;
+    }
+
+
+    input[type=submit] {
+        background: royalblue;
+        outline: none;
+        box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+        color: #fff;
+        font-weight: 400;
+        padding: 6px 20px;
+        text-transform: capitalize;
+        margin: 10px 5px;
+    }
+
+    input[type=submit]:active{
+        transform: translateY(3px);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+
+    h1 {
+        font-size: 1.5rem !important;
+        font-family: cursive !important;
+        font-weight: 300;
+        margin: 10px 0;
+        padding: 0 20px;
+        width: 100%;
+    }
+
+</style>
+
+<form method="post" action="" autocomplete="off">
+    <h1>CSRF Attack Form</h1>
+    <label for='action'>action</label>
+    <input value="" id="action" name="site"/>
+    <label for="data">data</label>
+    <input name="data" id='data' value="India is Great !"/>
+    <input type="submit" value="submit"/>
+</form>
+<script>
+    const $ = a => document.querySelector(a);
+    $('[name=site]').addEventListener("keyup", e => {
+        let {value} = e.target;
+        document.forms[0].setAttribute("action", value);
+    })
+</script>
+        </div>
+    </main>
+</body>
+
+<script>
+    function resize(){
+        let height = window.innerHeight;
+        let width = window.innerWidth;
+        document.documentElement.style.setProperty("--innerH", height+"px");
+        document.documentElement.style.setProperty("--innerW", width+"px");
+    }
+    resize()
+    window.onresize = resize;
+</script>
+</html>
